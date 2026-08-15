@@ -1,0 +1,10 @@
+# Upstream game — no licence, never redistribute it here.
+upstream/
+
+# Derived artefact produced by the build from upstream data — deployed, never committed.
+frames.json
+
+# scratch
+.replay_scratch_state.json
+__pycache__/
+*.pyc

@@ -1,0 +1,116 @@
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3546;
+  --fg:#c9d4e3; --dim:#7d8da5; --accent:#58a6ff;
+  --unit:#3fd0c9; --enemy:#ff6b6b; --enemy2:#ffa94d; --building:#ffd43b;
+  --water:#1f6feb; --mountain:#586074; --danger:#ff5c5c; --spawn:#c084fc;
+  --good:#4ade80; --bad:#ff7b72;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;
+  font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+header{padding:14px 16px 6px;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:22px;letter-spacing:2px}
+h1 .sub{font-size:13px;letter-spacing:1px;color:var(--dim);font-weight:400}
+.tag{margin:6px 0 0;font-size:12.5px;color:var(--dim)}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin:0 0 8px}
+
+main{display:flex;align-items:flex-start;gap:14px;padding:14px;max-width:1100px;margin:0 auto}
+#sessions{flex:0 0 230px}
+#stage{flex:1 1 auto;min-width:0}
+
+/* session list */
+#session-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.session{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:8px 10px;cursor:pointer;transition:border-color .12s}
+.session:hover{border-color:var(--accent)}
+.session.active{border-color:var(--accent);background:var(--panel2)}
+.session .row1{display:flex;justify-content:space-between;font-weight:600}
+.session .ver{color:var(--accent)}
+.session .outcome{font-size:12px}
+.session .stats{font-size:11.5px;color:var(--dim);margin-top:3px}
+.session .badge{font-size:10px;padding:1px 5px;border-radius:4px;margin-left:6px}
+.badge.play{background:#123b2a;color:var(--good)}
+.badge.noplay{background:#3a2233;color:var(--enemy2)}
+.win{color:var(--good)} .loss{color:var(--bad)} .aband{color:var(--dim)}
+
+/* session head */
+#session-head{margin-bottom:10px}
+#session-head h3{margin:0 0 3px;font-size:16px}
+#session-head .meta{font-size:12.5px;color:var(--dim)}
+
+/* board */
+#board-wrap{display:flex;justify-content:center}
+#board{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;
+  width:min(94vw,432px);aspect-ratio:1/1;background:var(--line);
+  border:1px solid var(--line);border-radius:8px;padding:3px}
+.cell{position:relative;display:flex;align-items:center;justify-content:center;
+  background:var(--panel);border-radius:4px;font-weight:700;font-size:clamp(13px,3.5vw,20px);
+  overflow:hidden}
+.cell .coord{position:absolute;top:1px;left:3px;font-size:8px;color:#3a4658;font-weight:400}
+.cell.t-water{background:#0f2a52;color:#6fb2ff}
+.cell.t-mountain{background:#242a36;color:#8791a3}
+.cell.unit{color:var(--unit)}
+.cell.enemy{color:var(--enemy)}
+.cell.enemy.spitter{color:var(--enemy2)}
+.cell.building{color:var(--building)}
+.cell.aimed{box-shadow:inset 0 0 0 2px var(--danger)}
+.cell.spawnwarn{box-shadow:inset 0 0 0 2px var(--spawn)}
+.cell .aimbadge{position:absolute;bottom:0;right:2px;font-size:8px;color:var(--danger);font-weight:700}
+.cell .spawnglyph{color:var(--spawn);font-size:11px}
+
+/* controls */
+#controls{display:flex;align-items:center;gap:6px;margin:12px 0 8px;flex-wrap:wrap;justify-content:center}
+#controls button{background:var(--panel2);color:var(--fg);border:1px solid var(--line);
+  border-radius:6px;min-width:40px;height:34px;font-size:14px;cursor:pointer}
+#controls button:hover{border-color:var(--accent)}
+#controls button.playing{color:var(--good);border-color:var(--good)}
+#slider{flex:1 1 160px;min-width:120px;accent-color:var(--accent)}
+.speed{font-size:12px;color:var(--dim);display:flex;align-items:center;gap:4px}
+.speed select{background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:5px;padding:2px}
+
+#frame-meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;justify-content:center;margin-bottom:6px}
+#frame-meta .k{color:var(--dim)}
+#frame-meta .delta.up{color:var(--good)} #frame-meta .delta.down{color:var(--bad)}
+#cmd-line{text-align:center;font-size:14px;margin:2px 0 8px;min-height:20px}
+#cmd-line .cmd{background:var(--panel2);border:1px solid var(--line);border-radius:6px;
+  padding:2px 8px;color:var(--accent)}
+#log{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;
+  font-size:12.5px;color:var(--dim);min-height:44px;white-space:pre-wrap}
+#log .l{display:block}
+
+/* legend */
+#legend-box{margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+#legend-box summary{cursor:pointer;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--dim)}
+#legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 12px;padding:8px 0;font-size:12.5px}
+#legend .g{display:inline-block;width:26px;text-align:center;font-weight:700;margin-right:6px;border-radius:3px}
+#legend .g.unit{color:var(--unit)}
+#legend .g.enemy{color:var(--enemy)}
+#legend .g.enemy.spitter{color:var(--enemy2)}
+#legend .g.building{color:var(--building)}
+#legend .g.t-water{color:#6fb2ff;background:#0f2a52}
+#legend .g.t-mountain{color:#8791a3;background:#242a36}
+#legend .g.aimed{box-shadow:inset 0 0 0 2px var(--danger)}
+#legend .g.spawnwarn{box-shadow:inset 0 0 0 2px var(--spawn);color:var(--spawn)}
+
+/* timeline */
+#timeline-view{font-size:13.5px}
+#timeline-view .why{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--enemy2);
+  border-radius:6px;padding:8px 12px;color:var(--dim);margin-bottom:12px}
+#timeline-view ol{margin:0;padding:0 0 0 4px;list-style:none}
+#timeline-view li{display:flex;gap:10px;padding:3px 0;border-bottom:1px solid #1c2330}
+#timeline-view li .ts{color:var(--dim);flex:0 0 62px;font-size:12px}
+#timeline-view li .c{color:var(--accent)}
+#timeline-view .notes{margin-top:14px}
+#timeline-view .notes .note{background:var(--panel);border:1px solid var(--line);border-radius:6px;
+  padding:8px 12px;margin-bottom:8px;color:var(--fg);white-space:pre-wrap}
+
+footer{border-top:1px solid var(--line);padding:12px 16px;color:var(--dim);font-size:11.5px;max-width:1100px;margin:0 auto}
+
+@media(max-width:760px){
+  main{flex-direction:column;padding:10px}
+  #sessions{flex:none;width:100%}
+  #session-list{flex-direction:row;overflow-x:auto;padding-bottom:4px}
+  .session{flex:0 0 200px}
+}

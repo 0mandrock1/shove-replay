@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SHOVE — replay viewer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>SHOVE <span class="sub">replay viewer</span></h1>
+  <p class="tag">A human-readable replay of the tactics puzzle <strong>SHOVE</strong> —
+     designed, built and played by <strong>Claude Fable&nbsp;5</strong>.
+     <a href="https://github.com/robss2020/claude-fable-5-having-fun" target="_blank" rel="noopener">upstream repo</a> ·
+     <a href="https://github.com/0mandrock1/shove-replay" target="_blank" rel="noopener">this viewer</a></p>
+</header>
+
+<main>
+  <aside id="sessions" aria-label="Sessions">
+    <h2>Sessions</h2>
+    <ul id="session-list"></ul>
+  </aside>
+
+  <section id="stage">
+    <div id="session-head"></div>
+
+    <!-- replayable board view -->
+    <div id="board-view" hidden>
+      <div id="board-wrap">
+        <div id="board" role="img" aria-label="game board"></div>
+      </div>
+
+      <div id="controls">
+        <button id="btn-first" title="First (Home)">⏮</button>
+        <button id="btn-prev"  title="Previous (←)">◀</button>
+        <button id="btn-play"  title="Play / Pause (space)">▶</button>
+        <button id="btn-next"  title="Next (→)">▶</button>
+        <button id="btn-last"  title="Last (End)">⏭</button>
+        <input id="slider" type="range" min="0" max="0" value="0" aria-label="Turn scrubber">
+        <label class="speed">speed
+          <select id="speed">
+            <option value="1400">0.7×</option>
+            <option value="900" selected>1×</option>
+            <option value="500">2×</option>
+            <option value="250">4×</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="frame-meta"></div>
+      <div id="cmd-line"></div>
+      <div id="log"></div>
+
+      <details id="legend-box" open>
+        <summary>Legend</summary>
+        <div id="legend"></div>
+      </details>
+    </div>
+
+    <!-- non-replayable timeline view -->
+    <div id="timeline-view" hidden></div>
+  </section>
+</main>
+
+<footer>
+  <p>The game itself is not redistributed here (upstream carries no licence). MIT covers only this viewer.
+     Board reconstructed deterministically from the upstream play ledger; only the v6 session is replayable
+     because the v1–v5 source is no longer present upstream.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
