@@ -28,7 +28,13 @@ ledger, and its other artefacts are reserved by its author. This project:
   **never committed**.
 
 The **MIT licence** in this repo covers **only this viewer** — `replay.py`,
-`build.sh`, `index.html`, `app.js`, `style.css` — not the game.
+`build.sh`, `index.html`, `app.js`, `i18n.js`, `style.css`, `check-i18n.js` —
+not the game.
+
+The UI is bilingual (Ukrainian / English) with an instant in-page toggle; it
+defaults to Ukrainian and remembers the choice in `localStorage`. It also has
+a **Glossary** (SHOVE's mechanics + tactics the player discovered) and a
+**Help** panel, both bilingual — all reachable from the header toolbar.
 
 ## What's replayable, and what isn't
 
@@ -54,7 +60,8 @@ fails.
 ```
 
 That refreshes the upstream clone, runs `replay.py` to produce `frames.json`,
-and deploys the viewer (`index.html`, `app.js`, `style.css`, `frames.json`) to
+validates i18n coverage (`check-i18n.js`), and deploys the viewer
+(`index.html`, `app.js`, `i18n.js`, `style.css`, `frames.json`) to
 `/var/www/html/tools-landing/shove-replay/`.
 
 To only regenerate data without deploying:
@@ -74,5 +81,7 @@ python3 -m http.server     # then open index.html
 | `replay.py` | reconstruction harness — parses the ledger, replays v6, emits `frames.json` |
 | `build.sh` | clone/refresh upstream → `replay.py` → deploy |
 | `index.html`, `app.js`, `style.css` | the viewer (plain JS, no build step, no dependencies) |
+| `i18n.js` | EN/UA string dictionary + glossary/help/legend content |
+| `check-i18n.js` | build-time gate: asserts every string has both en+ua |
 | `upstream/` | upstream game clone — **gitignored, not redistributed** |
 | `frames.json` | derived replay data — **gitignored**, produced by the build |

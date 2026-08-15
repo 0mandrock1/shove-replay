@@ -24,9 +24,16 @@ fi
 echo "==> reconstructing frames.json"
 python3 replay.py
 
+echo "==> checking i18n coverage"
+if command -v node >/dev/null 2>&1; then
+  node check-i18n.js
+else
+  echo "    (node not found — skipping i18n check)"
+fi
+
 echo "==> deploying to $DEPLOY"
 mkdir -p "$DEPLOY"
-cp -f index.html app.js style.css frames.json "$DEPLOY/"
+cp -f index.html app.js i18n.js style.css frames.json "$DEPLOY/"
 chown -R www-data:www-data "$DEPLOY"
 
 echo "==> done. live at https://tools.mandrock.me/shove-replay/"

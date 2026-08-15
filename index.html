@@ -8,16 +8,31 @@
 </head>
 <body>
 <header>
-  <h1>SHOVE <span class="sub">replay viewer</span></h1>
-  <p class="tag">A human-readable replay of the tactics puzzle <strong>SHOVE</strong> —
-     designed, built and played by <strong>Claude Fable&nbsp;5</strong>.
-     <a href="https://github.com/robss2020/claude-fable-5-having-fun" target="_blank" rel="noopener">upstream repo</a> ·
-     <a href="https://github.com/0mandrock1/shove-replay" target="_blank" rel="noopener">this viewer</a></p>
+  <div class="head-row">
+    <h1>SHOVE <span class="sub" data-i18n="h1_sub">replay viewer</span></h1>
+    <nav id="toolbar" data-i18n-label="aria_toolbar" aria-label="Panels &amp; language">
+      <button id="btn-glossary" type="button" data-i18n="nav_glossary" aria-expanded="false">Glossary</button>
+      <button id="btn-help" type="button" data-i18n="nav_help" aria-expanded="false">Help</button>
+      <button id="lang-toggle" type="button">EN</button>
+    </nav>
+  </div>
+  <p class="tag" data-i18n-html="tagline"></p>
 </header>
 
+<section id="panels">
+  <details id="glossary-box">
+    <summary data-i18n="gloss_title">Glossary</summary>
+    <div id="glossary"></div>
+  </details>
+  <details id="help-box">
+    <summary data-i18n="help_title">Help</summary>
+    <div id="help"></div>
+  </details>
+</section>
+
 <main>
-  <aside id="sessions" aria-label="Sessions">
-    <h2>Sessions</h2>
+  <aside id="sessions" data-i18n-label="sessions_h2" aria-label="Sessions">
+    <h2 data-i18n="sessions_h2">Sessions</h2>
     <ul id="session-list"></ul>
   </aside>
 
@@ -27,17 +42,17 @@
     <!-- replayable board view -->
     <div id="board-view" hidden>
       <div id="board-wrap">
-        <div id="board" role="img" aria-label="game board"></div>
+        <div id="board" role="img" data-i18n-label="aria_board" aria-label="game board"></div>
       </div>
 
       <div id="controls">
-        <button id="btn-first" title="First (Home)">⏮</button>
-        <button id="btn-prev"  title="Previous (←)">◀</button>
-        <button id="btn-play"  title="Play / Pause (space)">▶</button>
-        <button id="btn-next"  title="Next (→)">▶</button>
-        <button id="btn-last"  title="Last (End)">⏭</button>
-        <input id="slider" type="range" min="0" max="0" value="0" aria-label="Turn scrubber">
-        <label class="speed">speed
+        <button id="btn-first" data-i18n-title="ctrl_first" title="First (Home)">⏮</button>
+        <button id="btn-prev"  data-i18n-title="ctrl_prev"  title="Previous (←)">◀</button>
+        <button id="btn-play"  data-i18n-title="ctrl_play"  title="Play / Pause (space)">▶</button>
+        <button id="btn-next"  data-i18n-title="ctrl_next"  title="Next (→)">▶</button>
+        <button id="btn-last"  data-i18n-title="ctrl_last"  title="Last (End)">⏭</button>
+        <input id="slider" type="range" min="0" max="0" value="0" data-i18n-label="aria_scrubber" aria-label="Turn scrubber">
+        <label class="speed"><span data-i18n="speed_label">speed</span>
           <select id="speed">
             <option value="1400">0.7×</option>
             <option value="900" selected>1×</option>
@@ -52,7 +67,7 @@
       <div id="log"></div>
 
       <details id="legend-box" open>
-        <summary>Legend</summary>
+        <summary data-i18n="legend_summary">Legend</summary>
         <div id="legend"></div>
       </details>
     </div>
@@ -63,11 +78,10 @@
 </main>
 
 <footer>
-  <p>The game itself is not redistributed here (upstream carries no licence). MIT covers only this viewer.
-     Board reconstructed deterministically from the upstream play ledger; only the v6 session is replayable
-     because the v1–v5 source is no longer present upstream.</p>
+  <p data-i18n="footer_text"></p>
 </footer>
 
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
