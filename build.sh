@@ -10,7 +10,7 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$HERE"
 
 UPSTREAM_URL="https://github.com/robss2020/claude-fable-5-having-fun"
-DEPLOY="/var/www/html/tools-landing/shove-replay"
+DEPLOY="/root/cdn/claude/shove-replay"
 
 echo "==> refreshing upstream clone"
 if [ -d upstream/.git ]; then
@@ -36,4 +36,4 @@ mkdir -p "$DEPLOY"
 cp -f index.html app.js i18n.js style.css frames.json "$DEPLOY/"
 chown -R www-data:www-data "$DEPLOY"
 
-echo "==> done. live at https://tools.mandrock.me/shove-replay/"
+echo "==> done. live at https://articles.mandrock.me/claude/shove-replay/"
